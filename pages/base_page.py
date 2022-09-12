@@ -2,7 +2,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 class BasePage():
-    def __init__(self, browser, url, timeout=5):
+    def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)       # неявное ожидание
@@ -17,7 +17,7 @@ class BasePage():
             return False
         return True
 
-# функцию is_element_present будем юзать в main_page (by.css_selector-how, "#селектор"-what)
-# how  - аргумент КАК искать (xpath, id, class, css etc)
-# what - аргумент ЧТО искать (str-selector)
+# функцию is_element_present будем юзать в main_page
+# (by.css_selector-how, "#селектор"-what) == (*MainPageLocators.LOGIN_LINK)
+
     

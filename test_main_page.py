@@ -1,4 +1,5 @@
 from .pages.main_page import MainPage
+from .pages.login_page import LoginPage
 
 
 def test_guest_can_go_to_login_page(browser):       # тест перехода на страницу
@@ -14,3 +15,10 @@ def test_guest_should_see_login_link(browser):      # проверка пере�
     page.open()                                     # открытие страницы
     page.should_be_login_link()                     # проверка присутствия на странице линки к логину
 
+def test_login_and_registration_forms(browser):     # тест страницы login_page
+    link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+    page = LoginPage(browser, link)
+    page.open()
+    page.should_be_login_url()                      # проверка присутствия на странице login_page (по url)
+    page.should_be_login_form()                     # проверка присутствия на странице формы логина
+    page.should_be_register_form()                  # проверка присутствия на странице формы регистрации

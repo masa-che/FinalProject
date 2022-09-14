@@ -1,4 +1,4 @@
-компил-е, кэш pycharm
+# компил-е, кэш pycharm
 .idea/
 .pytest_cache
 *.__pycache__/

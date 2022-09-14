@@ -1,3 +1,4 @@
+компил-е, кэш pycharm
 .idea/
 .pytest_cache
 *.__pycache__/
@@ -6,7 +7,7 @@
 *.py[cod]
 *$py.class
 
-# Environments
+# виртуальные среды
 
 .env
 .venv

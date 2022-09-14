@@ -7,6 +7,6 @@ class MainPageLocators():
 
 
 class LoginPageLocators():
-    # кортеж id и селектор для проверок присутствия форм логина и регистрации, на странице login_page
+    # кортеж css и селектор для проверок присутствия форм логина и регистрации, на странице login_page
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
-    REG_FORM = (By.CSS_SELECTOR, "#register_form_")
+    REG_FORM = (By.CSS_SELECTOR, "#register_form")

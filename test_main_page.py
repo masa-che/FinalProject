@@ -11,7 +11,6 @@ def test_guest_can_go_to_login_page(browser):       # тест перехода 
     login_page.should_be_login_page()
 
 
-
 def test_guest_should_see_login_link(browser):      # проверка перехода по видимой (css-maine_page)  линке
     link = "http://selenium1py.pythonanywhere.com/"
     page = MainPage(browser, link)                  # для читабельности класс в переменную

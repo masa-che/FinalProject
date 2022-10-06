@@ -7,10 +7,12 @@ class MainPageLocators():
 
 
 class LoginPageLocators():
-    # кортеж css и селектор для проверок присутствия форм логина и регистрации, на странице login_page
+    # кортеж (локатор,значение) для проверок присутствия форм логина и регистрации, на странице login_page
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REG_FORM = (By.CSS_SELECTOR, "#register_form")
 
+
 class ProductPageLocators():
-    # кортеж css и селектор для выбора продукта, добавления его в корзину и т.д, на странице product_page
-    
+    # кортеж (локатор,значение) для выбора продукта, добавления его в корзину и т.д, на странице product_page
+    ADD_TO_BSK_BTN = (By.CSS_SELECTOR, "#add_to_basket_form > button")
+

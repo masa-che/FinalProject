@@ -1,4 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
+import math
+from selenium.common.exceptions import NoAlertPresentException
 
 
 class BasePage():
@@ -19,5 +21,20 @@ class BasePage():
 
 # функцию is_element_present будем юзать в main_page
 # (by.css_selector-how, "#селектор"-what) == (*MainPageLocators.LOGIN_LINK)
+
+    def solve_quiz_and_get_cod(self):                           # метод получения проверочного кода
+        alert = self.browser.switch_to.alert                    # определение алёрт-окна и переключение на него
+        x = alert.text.split(" ")[2]                            # парсит число присвоенное иксу
+        answer = str(math.log(abs((12 * math.sin(float(x))))))  # вычисление с взятым из икса числом
+        alert.send_keys(answer)                                 # добавление результата в окно алёрт
+        alert.accept()
+        try:
+            alert = self.browser.switch_to.alert
+            alert_text = alert.text
+            print(f"Ваш код: {alert_text}")                     # вывод расчёта ф-ции в console
+            alert.accept()
+        except NoAlertPresentException:                        # если расчёт не состоялся выпадет exept
+            print("Нет второго алерт-окна")
+
 
     

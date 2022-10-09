@@ -19,7 +19,7 @@ class ProductPage(BasePage):
             return False
 
     def assert_field_add_to_basket(self):    # проверка появления поля о добавлении товара в корзину
-        assert self.is_element_present(*ProductPageLocators.MESSAGE_ADD_BASKET), "Success message is presented"
+        assert self.browser.find_element(*ProductPageLocators.MESSAGE_ADD_BASKET), " Message isn't presented "
 
         # если браузеру не хватает времени чтобы найти css элемент из первого варианта кода, используй WebDriverWait!
 
@@ -29,6 +29,12 @@ class ProductPage(BasePage):
         #     return str(self.browser.find_element(*ProductPageLocators.MESSAGE_ADD_BASKET).text)
         # except NoSuchElementException:
         #     return None
+
+    def assert_field_price_to_basket(self):   # проверка появления поля со стоимостью корзины
+        assert self.browser.find_element(*ProductPageLocators.MESSAGE_PRICE_BASKET), " Message isn't presented "
+
+
+
 
 
 

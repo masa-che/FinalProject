@@ -9,7 +9,7 @@ def test_guest_can_add_product_to_basket(browser):
     product_page.add_to_basket()                            # нажатие кнопки добавления товара в корзину
     product_page.solve_quiz_and_get_cod()                   # функция мат. расчёта (код написан при помощи selenium)
     product_page.assert_field_add_to_basket()               # проверка alert окна-добавления товара в корзину
-
+    product_page.assert_field_price_to_basket()             # проверка alert окна-собщение со стоимостью корзины
     # book_name = product_page. # возврат_названия_книги()
     # book_price = product_page. # возврат_цены_книги()
     # product_page. # сообщение о успешной операции добавления в корзину товара(book_name, book_price)

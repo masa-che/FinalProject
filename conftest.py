@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import time
 
 
 def pytest_addoption(parser):
@@ -9,7 +10,7 @@ def pytest_addoption(parser):
                      help="Choose browser: chrome or firefox")
     # парсер выбора языка при запуске из терминала "--languege=<язык>"
     parser.addoption('--language', action='store',
-                     default='en', help="Choose lang")
+                     default='ru', help="Choose lang")
 
 
 @pytest.fixture(scope="function")
@@ -31,4 +32,7 @@ def browser(request):
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
     print("\nquit browser..")
-    browser.quit()
+    time.sleep(10)
+#   browser.quit()
+
+

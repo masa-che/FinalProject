@@ -25,3 +25,6 @@ def test_login_and_registration_forms(browser):     # тест страницы 
     page.should_be_login_url()                      # проверка  по url, что мы на странице registration and login
     page.should_be_login_form()                     # проверка присутствия на странице формы логина
     page.should_be_register_form()                  # проверка присутствия на странице формы регистрации
+
+
+# pytest -v --tb=line --language=en test_main_page.py

@@ -15,4 +15,5 @@ class LoginPageLocators():
 class ProductPageLocators():
     # кортеж (локатор,значение) для выбора продукта, добавления его в корзину и т.д, на странице product_page
     ADD_TO_BSK_BTN = (By.CSS_SELECTOR, "#add_to_basket_form > button")
+    MESSAGE_ADD_BASKET = (By.CSS_SELECTOR, "#messages > div:nth-child(1) > div")
 

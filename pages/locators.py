@@ -17,5 +17,9 @@ class ProductPageLocators():
     ADD_TO_BSK_BTN = (By.CSS_SELECTOR, "#add_to_basket_form > button")
     MESSAGE_ADD_BASKET = (By.CSS_SELECTOR, "#messages > div:nth-child(1) > div")
     MESSAGE_PRICE_BASKET = (By.CSS_SELECTOR, "#messages > div.alert.alert-safe.alert-noicon.alert-info.fade.in")
+    PRICE_BOOK = (By.CSS_SELECTOR, ".product_main .price_color")
+    NAME_BOOK = (By.CSS_SELECTOR, ".product_main h1")
+    PRICE_BOOK_IN_ALERT = (By.CSS_SELECTOR, ".alert-info strong")
+    NAME_BOOK_IN_ALERT = (By.CSS_SELECTOR, "#messages > div:nth-child(1) > div > strong")
 
 

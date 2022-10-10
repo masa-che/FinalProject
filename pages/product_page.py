@@ -18,7 +18,7 @@ class ProductPage(BasePage):
         except NoSuchElementException:       # в except указывается тип исключения который необходимо обработать
             return False
 
-    def assert_field_add_to_basket(self):    # проверка появления поля о добавлении товара в корзину
+    def alert_field_add_to_basket(self):    # проверка появления поля о добавлении товара в корзину
         assert self.browser.find_element(*ProductPageLocators.MESSAGE_ADD_BASKET), " Message isn't presented "
 
         # если браузеру не хватает времени чтобы найти css элемент из первого варианта кода, используй WebDriverWait!
@@ -30,14 +30,16 @@ class ProductPage(BasePage):
         # except NoSuchElementException:
         #     return None
 
-    def assert_field_price_to_basket(self):   # проверка появления поля со стоимостью корзины
+    def alert_field_price_to_basket(self):   # проверка появления поля со стоимостью корзины
         assert self.browser.find_element(*ProductPageLocators.MESSAGE_PRICE_BASKET), " Message isn't presented "
 
+    def price_check(self):
+        price_book = self.browser.find_element(*ProductPageLocators.PRICE_BOOK).text
+        price_book_in_alert = self.browser.find_element(*ProductPageLocators.PRICE_BOOK_IN_ALERT).text
+        assert price_book == price_book_in_alert, "wrong goods price, check basket sum or price of goods"
 
-
-
-
-
-
-
+    def product_name_check(self):
+        name_book = self.browser.find_element(*ProductPageLocators.NAME_BOOK).text
+        name_book_in_alert = self.browser.find_element(*ProductPageLocators.NAME_BOOK_IN_ALERT).text
+        assert name_book == name_book_in_alert, "wrong goods name, check the values in selectors"
 

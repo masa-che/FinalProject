@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class ProductPage(BasePage):
     def checking_promo_url(self):
         # проверка promo в url
-        promo_fragment = self.url.find("?promo=newYear")
+        promo_fragment = self.url.find("?promo=")
         assert promo_fragment > 0, "URL is not corrected"
 
     def add_to_basket(self):

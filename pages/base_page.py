@@ -1,6 +1,7 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
 import math
-from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 
 
 class BasePage():
@@ -36,5 +37,19 @@ class BasePage():
         except NoAlertPresentException:                        # если расчёт не состоялся выпадет exept
             print("Нет второго алерт-окна")
 
+    # метод для негативных проверок
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+        return False
 
-    
+    # метод для негативных проверок
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
+                ec.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True

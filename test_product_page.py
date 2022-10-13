@@ -44,3 +44,17 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     item_page.open()                                      # переход браузера по url
     item_page.add_to_basket()                             # нажатие кнопки добавления товара в корзину
     item_page.should_be_disappeared_alert_add_to_basket() # проверка исчезание алерт окна добавления товара в корзину
+
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()                           # проверка присутствия login_link на product_page
+
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()                               # проверка перехода на login_page из product_page

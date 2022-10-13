@@ -19,7 +19,7 @@ class ProductPage(BasePage):
             return False
 
     def alert_field_add_to_basket(self):     # проверка появления поля о добавлении товара в корзину
-        assert self.browser.find_element(*ProductPageLocators.MESSAGE_ADD_BASKET), " Message isn't presented "
+        assert self.browser.find_element(*ProductPageLocators.MESSAGE_ADD_BASKET), "Message isn't presented"
 
         # если браузеру не хватает времени чтобы найти css элемент из первого варианта кода, используй WebDriverWait!
 
@@ -31,17 +31,17 @@ class ProductPage(BasePage):
         #     return None
 
     def alert_field_price_to_basket(self):                # проверка появления поля со стоимостью корзины
-        assert self.browser.find_element(*ProductPageLocators.MESSAGE_PRICE_BASKET), " Message isn't presented "
+        assert self.browser.find_element(*ProductPageLocators.MESSAGE_PRICE_BASKET), "Message isn't presented"
 
     def price_check(self):                                # проверка равенства цены указанной в алёрт окне и цены товара
         price_book = self.browser.find_element(*ProductPageLocators.PRICE_BOOK).text
         price_book_in_alert = self.browser.find_element(*ProductPageLocators.PRICE_BOOK_IN_ALERT).text
-        assert price_book == price_book_in_alert, "wrong goods price, check basket sum or price of goods"
+        assert price_book == price_book_in_alert, "Wrong goods price, check basket sum or price of goods"
 
     def product_name_check(self):                         # проверка названий товаров в алёрт окне и описании товара
         name_book = self.browser.find_element(*ProductPageLocators.NAME_BOOK).text
         name_book_in_alert = self.browser.find_element(*ProductPageLocators.NAME_BOOK_IN_ALERT).text
-        assert name_book == name_book_in_alert, "wrong goods name, check the values in selectors"
+        assert name_book == name_book_in_alert, "Wrong goods name, check the values in selectors"
 
     def should_not_be_alert_add_to_basket(self):          # проверка отсутствия алёрт окна о добавлении товара в корзину
         assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ADD_BASKET),\

@@ -1,9 +1,10 @@
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 import pytest
 
 
 # фикстура с параметром введена для того, чтобы при прохождении теста по выборке из 9-ти link
-# обнаруженная ошибка на "7" не останавливала ран теста?f проходила его до конца (задание 4.3.4 )
+# обнаруженная ошибка на "7" не останавливала ран теста проходила его до конца (задание 4.3.4 )
 # @pytest.mark.parametrize('number', [pytest.param(x, marks=pytest.mark.xfail(x=7, reason='need to fix'))
 # for x in range(10)])
 # def test_guest_can_add_product_to_basket(browser, number):
@@ -41,20 +42,30 @@ def test_guest_cant_see_success_message(browser):
 def test_message_disappeared_after_adding_product_to_basket(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     item_page = ProductPage(browser, link)
-    item_page.open()                                      # переход браузера по url
-    item_page.add_to_basket()                             # нажатие кнопки добавления товара в корзину
-    item_page.should_be_disappeared_alert_add_to_basket() # проверка исчезание алерт окна добавления товара в корзину
+    item_page.open()                                         # переход браузера по url
+    item_page.add_to_basket()                                # нажатие кнопки добавления товара в корзину
+    item_page.should_be_disappeared_alert_add_to_basket()    # проверка исчезание алерт окна добавления товара в корзину
 
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
-    page.should_be_login_link()                           # проверка присутствия login_link на product_page
+    page.should_be_login_link()                              # проверка присутствия login_link на product_page
 
 
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
-    page.go_to_login_page()                               # проверка перехода на login_page из product_page
+    page.go_to_login_page()                                   # проверка перехода на login_page из product_page
+
+
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/"
+    page = ProductPage(browser, link)                         # по заданию старт теста со страницы product
+    page.open()                                               # открытие страницы по адресу url
+    page.go_to_basket()                                       # переход в раздел basket
+    basket_page = BasketPage(browser, browser.current_url)    # для работы методов используем обьект класса BasketPage
+    basket_page.expect_no_goods_in_the_basket()               # проверка,что корзина пуста
+    basket_page.expect_empty_message_in_the_basket()          # проверка сообщения, что корзина пуста

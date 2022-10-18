@@ -67,3 +67,6 @@ class BasePage:
     def go_to_basket(self):
         self.browser.find_element(*BasePageLocators.MOVE_TO_BASKET).click()
 
+    # проверка регистрации пользователя
+    def check_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon isn't presented, reg new user"

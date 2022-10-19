@@ -1,5 +1,8 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.main_page import MainPage
+import time
 import pytest
 
 
@@ -71,21 +74,32 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     basket_page.expect_empty_message_in_the_basket()         # проверка сообщения, что корзина пуста
 
 
-class TestUserAddToBasketFromProductPage:                    # 4.3.13 обьединение тестов в один класс, рег. пользователя
+@pytest.mark.login_user
+class TestUserAddToBasketFromProductPage:                   # 4.3.13 обьединение тестов в один класс, рег. пользователя
+    @pytest.fixture(scope="function", autouse=True)         # autouse - запуск тестов без явного вызова фикстуры
+    def setup(self, browser):                               # ВАЖНО! этот пример рассматривается в учебных целях, в работе не надо так ¯\_(ツ)_/¯
+        link = "http://selenium1py.pythonanywhere.com//accounts/login/"
+        login_page = LoginPage(browser, link)               # для регистрации пользователя берём метод из LoginPage
+        login_page.open()                                   # открытие страницы регистрации по link
+        email = str(time.time()) + "@fakemail.com"          # при помощи модуля time создаём email
+        password = str(time.time())                         # при помощи модуля time создаём password
+        login_page.register_new_user(email, password)       # регистрация пользователя, в метод парсятся имейл с паролем
+        main_page = MainPage(browser, browser.current_url)  # для проверки в работу берём метод из MainPage с использованием текущей url (curent_url)
+        main_page.check_authorized_user()                   # метод проверки регистрации пользователя
 
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         product_page = ProductPage(browser, link)
-        product_page.open()                                  # переход браузера по url
-        product_page.add_to_basket()                         # нажатие кнопки добавления товара в корзину
-        product_page.alert_field_add_to_basket()             # проверка alert окна-добавления товара в корзину
-        product_page.alert_field_price_to_basket()           # проверка alert окна-собщение со стоимостью корзины
-        product_page.price_check()                           # проверка равенства цены указанной в алёрт окне и цены товара
-        product_page.product_name_check()                    # проверка названий товаров в алёрт окне и описании товара
+        product_page.open()                                 # переход браузера по url
+        product_page.add_to_basket()                        # нажатие кнопки добавления товара в корзину
+        product_page.alert_field_add_to_basket()            # проверка alert окна-добавления товара в корзину
+        product_page.alert_field_price_to_basket()          # проверка alert окна-собщение со стоимостью корзины
+        product_page.price_check()                          # проверка равенства цены указанной в алёрт окне и цены товара
+        product_page.product_name_check()                   # проверка названий товаров в алёрт окне и описании товара
 
     def test_user_cant_see_success_message(self, browser):
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
         item_page = ProductPage(browser, link)
-        item_page.open()                                     # переход браузера по url
-        item_page.should_not_be_alert_add_to_basket()        # проверка отсутствия алёрт окна о добавлении товара в корзину
+        item_page.open()                                    # переход браузера по url
+        item_page.should_not_be_alert_add_to_basket()       # проверка отсутствия алёрт окна о добавлении товара в корзину

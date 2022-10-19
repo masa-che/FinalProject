@@ -69,4 +69,4 @@ class BasePage:
 
     # проверка регистрации пользователя
     def check_authorized_user(self):
-        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon isn't presented, reg new user"
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon isn't presented, log or reg new user"
